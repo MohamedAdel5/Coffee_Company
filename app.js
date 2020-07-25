@@ -7,6 +7,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 
 const connectToDB = require("./utils/connectToDB");
+const coffeeMachineRouter = require("./routes/coffeeMachineRoutes");
+const errorController = require("./controllers/errorController");
 
 //Globals:-
 //-----------------------------------------------------------------
@@ -16,6 +18,9 @@ dotenv.config({
 });
 const app = express();
 const port = process.env.PORT || 3000;
+const apiPrefix = "/api";
+const apiVersion = 1;
+const apiBase = `${apiPrefix}/v${apiVersion}`;
 
 //Middlewares:-
 //-----------------------------------------------------------------
@@ -30,6 +35,16 @@ app.use(mongoSanitize());
 
 //Third: Data sanitization against XSS(cross-site scripting) attacks.
 app.use(xss());
+
+//Route Handlers:-
+//-----------------------------------------------------------------
+app.use(`${apiBase}/coffee-machines`, coffeeMachineRouter);
+app.use("*", (req, res, next) => {
+  // 404, route not found
+  const error = new AppError("This route can't be found", 404);
+  next(error);
+});
+app.use(errorController); //Error Handling
 
 //Connect to database then start the server:-
 //-----------------------------------------------------------------
