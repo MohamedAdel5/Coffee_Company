@@ -8,6 +8,7 @@ const xss = require("xss-clean");
 
 const connectToDB = require("./utils/connectToDB");
 const coffeeMachineRouter = require("./routes/coffeeMachineRoutes");
+const coffeePodRouter = require("./routes/coffeePodRoutes");
 const errorController = require("./controllers/errorController");
 
 //Globals:-
@@ -39,6 +40,7 @@ app.use(xss());
 //Route Handlers:-
 //-----------------------------------------------------------------
 app.use(`${apiBase}/coffee-machines`, coffeeMachineRouter);
+app.use(`${apiBase}/coffee-pods`, coffeePodRouter);
 app.use("*", (req, res, next) => {
   // 404, route not found
   const error = new AppError("This route can't be found", 404);
