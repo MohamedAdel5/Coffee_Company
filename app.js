@@ -10,6 +10,7 @@ const connectToDB = require("./utils/connectToDB");
 const coffeeMachineRouter = require("./routes/coffeeMachineRoutes");
 const coffeePodRouter = require("./routes/coffeePodRoutes");
 const errorController = require("./controllers/errorController");
+const AppError = require("./utils/appError");
 
 //Globals:-
 //-----------------------------------------------------------------

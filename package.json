@@ -4,7 +4,8 @@
   "description": "An Api For Serving Coffee Machines & Coffee Pods Data For An Ecommerce Mobile App Client.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed": "node seeder/seeder.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
